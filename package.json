@@ -1,0 +1,16 @@
+{
+  "name": "simple-quiz",
+  "version": "1.0.0",
+  "description": "\"Simple quiz | Bootstrap | Kostya Ostapuk \u001b[1;2o| VK: \u0016\u001b[2~https://vk.com/kostyaostapuk\"\u001b[D | INST: https://www.instagram.com/kostyaostapuk\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kostya Ostapuk",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^4.0.0-beta.2",
+    "jquery": "^3.2.1",
+    "popper.js": "^1.12.9"
+  }
+}

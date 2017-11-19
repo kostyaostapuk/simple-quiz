@@ -43,10 +43,37 @@ span#currency {
 .progress .progress-bar{
 	background-image: linear-gradient(90deg, #00d9bf, #00d977);
 }
+.question-title{
+	margin: 10px 0px;
+	font-weight: 700;
+}
+.answer-box{
+	display: flex;
+	flex-direction: row;
+}
 /*----- QUIZ Close -----*/
 
 /*----- IMAGES -----*/
 .answer-box img{
-	height: 150px;
+	height: 100px;
+	margin-bottom: 6px;
+}
+.btn-success{
+	background-image: linear-gradient(90deg, #00d9bf, #00d977);
+	border-color: transparent;
+}
+.btn-success:hover{
+	border-color: transparent;
+	box-shadow: 0 3px 0 0 #00bb85, 0 2px 8px 0 #00d99b, 0 4px 10px 0 rgba(33,7,77,.5);
+	cursor: pointer;
+}
+.btn-success:active, .btn-success:focus, .btn-success:visited{
+	border-color: transparent !important;
+	background-image: linear-gradient(90deg, #00d9bf, #00d977) !important;
+	box-shadow: none !important;
+}
+#place-btn{
+	margin-top: 10px;
+	align-items: center;
 }
 /*----- IMAGES Close -----*/

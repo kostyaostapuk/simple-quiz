@@ -110,7 +110,7 @@ $(function(){
 			var bodyAnswer="<div class='col-md-"+sizeCol+" text-center'>"+
 			value.answers[i]+
 			"<br><img class='img-responsive' src="+value.img[i]+"><br>"+
-			"<input name='answer' value='question"+i+"' type='radio'>"+
+			"<input id='input' name='answer' value='question"+i+"' type='radio'>"+
 			"<div class='row'><div class='col-md-12'>"+
 			"<div id='place-btn'></div>"+
 			"</div></div></div>";
@@ -129,7 +129,7 @@ $(function(){
 	qstnCounterBox.text(counter());
 
 	//Handler event click on ipnut
-	$("input").on("click", function(){
+	$("#input").on("click", function(){
 		var bodyBtn="<button id='next' class='btn btn-success'>Следующий вопрос</button>";
 		$("#place-btn").html(bodyBtn);
 	});

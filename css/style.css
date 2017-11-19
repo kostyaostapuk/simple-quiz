@@ -44,3 +44,9 @@ span#currency {
 	background-image: linear-gradient(90deg, #00d9bf, #00d977);
 }
 /*----- QUIZ Close -----*/
+
+/*----- IMAGES -----*/
+.answer-box img{
+	height: 150px;
+}
+/*----- IMAGES Close -----*/

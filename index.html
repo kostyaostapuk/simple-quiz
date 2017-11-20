@@ -6,8 +6,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"> -->
+	<!-- <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css"> -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/style.css">
 
 	<title>Simple Quiz</title>
@@ -15,6 +16,7 @@
 
 <body>
 	<div class="container">
+		<section id="quiz">
 			<div class="row">
 				<div class="col-md-3">
 					<div class="discount-info text-center">
@@ -22,7 +24,8 @@
 							<div class="card-body">
 								<p class="card-text">Пройдите тест до конца и успейте получить персональную скидку</p>
 								<h4 class="card-title">На ваш продукт</h4>
-								<div id="discount">350 <span id="currency">руб.</span></div>
+
+									<div id="discount"></div>
 							</div>
 						</div>
 					</div>
@@ -41,20 +44,62 @@
 					<div class="card">
 						<div class="card-body">
 							<div class="progress">
-								<div class="progress-bar" style="width:16%" aria-valuenow="16" aria-valuemin="0" aria-valuemax="100">16%</div>
+								<div class="progress-bar" style="width:0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">16%</div>
 							</div>
 							<div class="question-display">
 								<div class="question-counter">Вопрос 1 из <span id="question-counter"></span></div>
 								<div class="question-title"></div>
 							</div>
-
-								<div class="answer-box">
-
+							<div class="answer-box"></div>
+							<div class="col-md-12 text-center">
+								<div class="btn-box">
+									<button id="next" class="btn-next">Следующий вопрос</button>
 								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+		</section>
+		<hr>
+		<section id="end">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<div class="template-title"></div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="offset-2 col-md-3">
+						<div class="card">
+							<div class="card-body">
+								<p class="card-text text-center">
+									Мы закрепим<br>персональную скидку за Вашим номером телефона
+								</p>
+								<form action="" class="callback-form text-center" method="post">
+									<input id="phone-user-end" type="text" class="form-control text-center" name="phone-user" placeholder="+375 (__) ___-__-__" required>
+									<input id="email-user" type="text" class="form-control text-center" name="phone-user" placeholder="Ваш e-mail" required>
+									<button id="send" class="btn-next lg">Отправить</button>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 text-center">
+						<div class="template-box">
+							<div class="template-subtitle">Ваша скидка <span id="discount-now"></span>
+							действует в течение <span id="days"></span> <span id="days-suffix"></span>
+							<div class="discription"></div>
+							</div>
+							<ul class="list-group">
+
+							</ul>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</section>
 	</div>
 
 	<!-- <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>

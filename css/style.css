@@ -26,9 +26,12 @@ body {
 }
 span#currency {
   color: #969696;
-	font-size: 16px;
+	font-size: 12px;
+	text-transform: uppercase;
+	margin-left: 2px;
 }
 /*----- DISCOUNT-INFO Close -----*/
+
 
 /*----- CALLBACK -----*/
 .callback{
@@ -39,6 +42,7 @@ span#currency {
 }
 /*----- CALLBACK Close -----*/
 
+
 /*----- QUIZ -----*/
 .progress .progress-bar{
 	background-image: linear-gradient(90deg, #00d9bf, #00d977);
@@ -47,33 +51,68 @@ span#currency {
 	margin: 10px 0px;
 	font-weight: 700;
 }
+.question-counter{
+	margin-top: 10px;
+	color: #969696;
+}
 .answer-box{
 	display: flex;
 	flex-direction: row;
 }
+.btn-box{
+	margin-top: 20px;
+}
 /*----- QUIZ Close -----*/
+
 
 /*----- IMAGES -----*/
 .answer-box img{
 	height: 100px;
 	margin-bottom: 6px;
 }
-.btn-success{
+/*----- IMAGES Close -----*/
+
+
+/*----- BUTTONS -----*/
+.btn-next{
+	margin-top: 5px;
 	background-image: linear-gradient(90deg, #00d9bf, #00d977);
 	border-color: transparent;
+	color: #fff;
+	padding: 5px 20px 5px 20px;
+	border-radius: 5px;
 }
-.btn-success:hover{
+.btn-next:hover{
 	border-color: transparent;
 	box-shadow: 0 3px 0 0 #00bb85, 0 2px 8px 0 #00d99b, 0 4px 10px 0 rgba(33,7,77,.5);
 	cursor: pointer;
 }
-.btn-success:active, .btn-success:focus, .btn-success:visited{
-	border-color: transparent !important;
-	background-image: linear-gradient(90deg, #00d9bf, #00d977) !important;
-	box-shadow: none !important;
+.lg{
+	padding: 5px 60px 5px 60px !important;
 }
-#place-btn{
-	margin-top: 10px;
+.btn-box{
+	display: none;
+}
+/*----- BUTTONS Close -----*/
+
+
+/*----- END-TEMPLATE -----*/
+.list-group-item{
 	align-items: center;
+	justify-content: center;
+	display: flex;
+	border: 1px solid transparent !important;
 }
-/*----- IMAGES Close -----*/
+.template-title{
+	font-size: 30px;
+}
+.template-box{
+	border-radius: 6px;
+	border: 1px solid rgba(0,0,0,.125);
+	padding: 10px;
+}
+.list-group i{
+	font-size: 45px;
+	margin-right: 10px;
+}
+/*----- END-TEMPLATE Close -----*/

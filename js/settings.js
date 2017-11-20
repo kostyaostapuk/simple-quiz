@@ -1,137 +1,227 @@
-$(function(){
-	var qstnTitle= $(".question-title");
-	var qstnCounterBox=$("#question-counter");
-	var answerBox=$(".answer-box");
-
-	//===============================
-	//========Настройки QUIZ=========
-	//===============================
-	//Начальный размер скидки
-	var startDiscount=350;
-	//Количество всех вопросов
-	//
-	//===============================
-
-
-	question=[
-		//Вопрос 1
-		{
-  		title: "1. Заголовок вопроса",
-  		answers: [
-				"Ответ №1 вопроса 1",
-			  "Ответ №2 вопроса 1",
-				"Ответ №3 вопроса 1",
-				"Ответ №4 вопроса 1"],
-  		img: [
-    		"img/typeProduct/question-1/1.jpg",
-    		"img/typeProduct/question-1/2.jpg",
-    		"img/typeProduct/question-1/3.jpg",
-    		"img/typeProduct/question-1/4.jpg"
-  		],
-  		type: "grid"
-		},
-		// //Вопрос 2
-		// {
-  	// 	title: "2. Заголовок вопроса",
-  	// 	answers: [
-		// 		"Ответ №1 вопроса 2",
-		// 	  "Ответ №2 вопроса 2",
-		// 		"Ответ №3 вопроса 2",
-		// 		"Ответ №4 вопроса 2"],
-  	// 	img: [
-    // 		"img/typeProduct/question-2/1.jpg",
-    // 		"img/typeProduct/question-2/2.jpg",
-    // 		"img/typeProduct/question-2/3.jpg",
-    // 		"img/typeProduct/question-2/4.jpg"
-  	// 	],
-  	// 	type: "grid"
-		// },
-		// //Вопрос 3
-		// {
-  	// 	title: "3. Заголовок вопроса",
-  	// 	answers: [
-		// 		"Ответ №1 вопроса 3",
-		// 	  "Ответ №2 вопроса 3",
-		// 		"Ответ №3 вопроса 3",
-		// 		"Ответ №4 вопроса 3"],
-  	// 	img: [
-    // 		"img/typeProduct/question-3/1.jpg",
-    // 		"img/typeProduct/question-3/2.jpg",
-    // 		"img/typeProduct/question-3/3.jpg",
-    // 		"img/typeProduct/question-3/4.jpg"
-  	// 	],
-  	// 	type: "list"
-		// },
-		// //Вопрос 4
-		// {
-  	// 	title: "4. Заголовок вопроса",
-  	// 	answers: [
-		// 		"Ответ №1 вопроса 1",
-		// 	  "Ответ №2 вопроса 1",
-		// 		"Ответ №3 вопроса 1",
-		// 		"Ответ №4 вопроса 1"],
-  	// 	img: [
-    // 		"img/typeProduct/question-4/1.jpg",
-    // 		"img/typeProduct/question-4/2.jpg",
-    // 		"img/typeProduct/question-4/3.jpg",
-    // 		"img/typeProduct/question-4/4.jpg"
-  	// 	],
-  	// 	type: "list"
-		// }
-	];
-
-	//Generated Values for Quiz
-	$.each(question, function(key, value){
-		console.log(value.title);
-		for (var i = 0; i < value.answers.length; i++) {
-			var sizeCol=0;
-			switch (counter()) {
-				case 1:
-					sizeCol=3;
-				break;
-				case 2:
-					sizeCol=6;
-				break;
-				case 3:
-					sizeCol=4;
-				break;
-				case 4:
-					sizeCol=4;
-				break;
-				case 5:
-					sizeCol=2;
-				break;
-				case 6:
-					sizeCol=2;
-				break;
-			}
-
-			qstnTitle.text(value.title);
-			var bodyAnswer="<div class='col-md-"+sizeCol+" text-center'>"+
-			value.answers[i]+
-			"<br><img class='img-responsive' src="+value.img[i]+"><br>"+
-			"<input id='input' name='answer' value='question"+i+"' type='radio'>"+
-			"<div class='row'><div class='col-md-12'>"+
-			"<div id='place-btn'></div>"+
-			"</div></div></div>";
-			answerBox.append(bodyAnswer);
-		}
-	});
-
-	//Counter Questions
-	function counter(){
-		var count=0;
-		for(var key in question){
-			count++;
-		}
-		return count;
+$(function() {
+  var qstnTitle = $(".question-title");
+  var qstnCounterBox = $("#question-counter");
+  var answerBox = $(".answer-box");
+  var progressBar = $(".progress-bar");
+  var discountBox = $("#discount");
+  var daysBox = $("#days");
+  var suffixBox = $("#days-suffix");
+  var discriptBox = $(".discription");
+  var listGroupBox = $(".list-group");
+	var templateTitleBox=$(".template-title");
+  //===============================
+  //========Настройки QUIZ=========
+  //===============================
+  //Начальный размер скидки
+	var title="Благодарим за ваши ответы!";
+  var startDiscount = 350;
+  var currency = "руб.";
+  var days = 31;
+  var discript = "на любую вашу сделку";
+  //Количество всех вопросов
+  //
+  //===============================
+	function ChangeValuesTemplate(){
+		templateTitleBox.text(title);
+	  discountBox.text(startDiscount);
+	  discountBox.append("<span id='currency'>" + currency + "</span>");
+	  discriptBox.text(discript);
 	}
-	qstnCounterBox.text(counter());
+	ChangeValuesTemplate();
+  function changeSuffix(value) {
+    if (value == 1) {
+      return "день";
+    } else if (value == 2 || value == 3 || value == 22 || value == 23 || value == 24) {
+      return "дня";
+    } else if (value > 31 || value == 31) {
+      daysBox.text(1);
+      return "месяц";
+    } else {
+      return "дней";
+    }
+  }
+  daysBox.text(days);
+  suffixBox.text(changeSuffix(days));
 
-	//Handler event click on ipnut
-	$("#input").on("click", function(){
-		var bodyBtn="<button id='next' class='btn btn-success'>Следующий вопрос</button>";
-		$("#place-btn").html(bodyBtn);
-	});
+  var endTemplate = {
+    title: "Благодарим за ответы!",
+    days: 15,
+    subtitle: "Оставьте свой e-mail и получите:",
+    advantages: [{
+        title: "20 биткоинов на ваш счёт",
+        icon: "fa fa-btc"
+      },
+      {
+        title: "Крутой грузовик",
+        icon: "fa fa-truck"
+      },
+      {
+        title: "Бомбическое настроение",
+        icon: "fa fa-bomb"
+      }
+    ]
+  };
+  question = [
+    //Вопрос 1
+    {
+      title: "1. Заголовок вопроса",
+      answers: [
+        "Ответ №1 вопроса 1",
+        "Ответ №2 вопроса 1",
+        "Ответ №3 вопроса 1",
+        "Ответ №4 вопроса 1"
+      ],
+      img: [
+        "img/typeProduct/question-1/1.jpg",
+        "img/typeProduct/question-1/2.jpg",
+        "img/typeProduct/question-1/3.jpg",
+        "img/typeProduct/question-1/4.jpg"
+      ],
+      type: "grid"
+    },
+    //Вопрос 2
+    {
+      title: "2. Заголовок вопроса",
+      answers: [
+        "Ответ №1 вопроса 2",
+        "Ответ №2 вопроса 2",
+        "Ответ №3 вопроса 2",
+        "Ответ №4 вопроса 2"
+      ],
+      img: [
+        "img/typeProduct/question-2/1.jpg",
+        "img/typeProduct/question-2/2.jpg",
+        "img/typeProduct/question-2/3.jpg",
+        "img/typeProduct/question-2/4.jpg"
+      ],
+      type: "grid"
+    },
+    //Вопрос 3
+    {
+      title: "3. Заголовок вопроса",
+      answers: [
+        "Ответ №1 вопроса 3",
+        "Ответ №2 вопроса 3",
+        "Ответ №3 вопроса 3",
+        "Ответ №4 вопроса 3"
+      ],
+      img: [
+        "img/typeProduct/question-3/1.jpg",
+        "img/typeProduct/question-3/2.jpg",
+        "img/typeProduct/question-3/3.jpg",
+        "img/typeProduct/question-3/4.jpg"
+      ],
+      type: "list"
+    },
+    //Вопрос 4
+    {
+      title: "4. Заголовок вопроса",
+      answers: [
+        "Ответ №1 вопроса 1",
+        "Ответ №2 вопроса 1",
+        "Ответ №3 вопроса 1",
+        "Ответ №4 вопроса 1"
+      ],
+      img: [
+        "img/typeProduct/question-4/1.jpg",
+        "img/typeProduct/question-4/2.jpg",
+        "img/typeProduct/question-4/3.jpg",
+        "img/typeProduct/question-4/4.jpg"
+      ],
+      type: "list"
+    }
+  ];
 
+  //Generated Answer-Box for Quiz
+  var currentQuestion = 0;
+
+  function Generated() {
+    var answersLength = question[currentQuestion].answers.length;
+    var qstnCount = question.length;
+    var title = question[currentQuestion].title;
+    console.log(answersLength);
+    var choice;
+    for (var i = 0; i < answersLength; i++) {
+      var sizeCol = 0;
+      switch (counter()) {
+        case 1:
+          sizeCol = 12;
+          break;
+        case 2:
+          sizeCol = 6;
+          break;
+        case 3:
+          sizeCol = 4;
+          break;
+        case 4:
+          sizeCol = 3;
+          break;
+        case 5:
+          sizeCol = 2;
+          break;
+        case 6:
+          sizeCol = 2;
+          break;
+      }
+      choice = question[currentQuestion].answers[i];
+      console.log(choice);
+      img = question[currentQuestion].img[i];
+      qstnTitle.text(title);
+      var bodyAnswer = "<div class='col-md-" + sizeCol + " text-center'>" +
+        choice +
+        "<br><img class='img-responsive' src=" + img + "><br>" +
+        "<input class='radio-btn' name='answer' value='question" + i + "' type='radio'>" +
+        "</div>";
+      answerBox.append(bodyAnswer);
+    }
+  }
+  Generated();
+
+  function Template() {
+		$.each(endTemplate.advantages, function(key, value){
+			listGroupBox.append("<li class='list-group-item'><i class='"+value.icon+"'></i> "+value.title+"</li>");
+		});
+
+  }
+  Template();
+
+  //Counter Questions
+  function counter() {
+    var count = 0;
+    for (var key in question) {
+      count++;
+    }
+    return count;
+  }
+  qstnCounterBox.text(counter());
+
+  //Revome Question
+  function Clear() {
+    qstnTitle.empty();
+    answerBox.empty();
+  }
+  //Add values in progress-bar
+  var step = Math.round((100 / question.length));
+  var valBar=step;
+	progressBar.css("width",valBar+"%");
+
+  function Up() {
+		valBar+=step;
+    progressBar.css("width",valBar+"%");
+		progressBar.attr("aria-valuenow", valBar);
+		$(".progress-bar").text(valBar+"%");
+  }
+
+  //Handler event click on ipnut
+  $(".radio-btn").on("click", function() {
+    $(".btn-box").css("display", "block");
+  });
+  $(".btn-next").click(
+    function() {
+      Clear();
+      currentQuestion++;
+      Generated();
+			Up();
+    }
+  );
 });

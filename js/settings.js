@@ -1,6 +1,6 @@
 $(function() {
   var qstnTitle = $(".question-title");
-  var qstnCounterBox = $("#question-counter");
+
   var answerBox = $(".answer-box");
   var progressBar = $(".progress-bar");
   var discountBox = $("#discount");
@@ -9,24 +9,20 @@ $(function() {
   var discriptBox = $(".discription");
   var listGroupBox = $(".list-group");
 	var templateTitleBox=$(".template-title");
+	var qstnStartBox=$("#question-start");
+	var qstnEndBox = $("#question-end");
+	var btnBox=$(".btn-box");
   //===============================
   //========Настройки QUIZ=========
   //===============================
   //Начальный размер скидки
 	var title="Благодарим за ваши ответы!";
-  var startDiscount = 350;
-  var currency = "руб.";
   var days = 31;
   var discript = "на любую вашу сделку";
   //Количество всех вопросов
   //
   //===============================
-	function ChangeValuesTemplate(){
-		templateTitleBox.text(title);
-	  discountBox.text(startDiscount);
-	  discountBox.append("<span id='currency'>" + currency + "</span>");
-	  discriptBox.text(discript);
-	}
+
 	ChangeValuesTemplate();
   function changeSuffix(value) {
     if (value == 1) {
@@ -35,13 +31,17 @@ $(function() {
       return "дня";
     } else if (value > 31 || value == 31) {
       daysBox.text(1);
-      return "месяц";
+      return "месяца";
     } else {
       return "дней";
     }
   }
-  daysBox.text(days);
-  suffixBox.text(changeSuffix(days));
+	function ChangeValuesTemplate(){
+		templateTitleBox.text(title);
+	  discriptBox.text(discript);
+		daysBox.text(days);
+	  suffixBox.text(changeSuffix(days));
+	}
 
   var endTemplate = {
     title: "Благодарим за ответы!",
@@ -117,10 +117,10 @@ $(function() {
     {
       title: "4. Заголовок вопроса",
       answers: [
-        "Ответ №1 вопроса 1",
-        "Ответ №2 вопроса 1",
-        "Ответ №3 вопроса 1",
-        "Ответ №4 вопроса 1"
+        "Ответ №1 вопроса 4",
+        "Ответ №2 вопроса 4",
+        "Ответ №3 вопроса 4",
+        "Ответ №4 вопроса 4"
       ],
       img: [
         "img/typeProduct/question-4/1.jpg",
@@ -134,6 +134,7 @@ $(function() {
 
   //Generated Answer-Box for Quiz
   var currentQuestion = 0;
+	var startQuestion=1;
 
   function Generated() {
     var answersLength = question[currentQuestion].answers.length;
@@ -169,7 +170,7 @@ $(function() {
       qstnTitle.text(title);
       var bodyAnswer = "<div class='col-md-" + sizeCol + " text-center'>" +
         choice +
-        "<br><img class='img-responsive' src=" + img + "><br>" +
+        "<br><img class='img-responsive rounded' src=" + img + "><br>" +
         "<input class='radio-btn' name='answer' value='question" + i + "' type='radio'>" +
         "</div>";
       answerBox.append(bodyAnswer);
@@ -193,10 +194,14 @@ $(function() {
     }
     return count;
   }
-  qstnCounterBox.text(counter());
+
+	qstnStartBox.text(startQuestion);
+	qstnEndBox.text(counter());
+
 
   //Revome Question
   function Clear() {
+
     qstnTitle.empty();
     answerBox.empty();
   }
@@ -210,14 +215,20 @@ $(function() {
     progressBar.css("width",valBar+"%");
 		progressBar.attr("aria-valuenow", valBar);
 		$(".progress-bar").text(valBar+"%");
+
+		//change question-start
+		startQuestion+=1;
+		qstnStartBox.text(startQuestion);
   }
 
   //Handler event click on ipnut
-  $(".radio-btn").on("click", function() {
-    $(".btn-box").css("display", "block");
+  $(".radio-btn").change(function() {
+			$(".btn-box").show();
   });
   $(".btn-next").click(
+
     function() {
+			$(".btn-box").hide();
       Clear();
       currentQuestion++;
       Generated();

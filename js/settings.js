@@ -222,11 +222,10 @@ $(function() {
   }
 
   //Handler event click on ipnut
-  $(".radio-btn").change(function() {
+  $(document).on("click",".radio-btn",function() {
 			$(".btn-box").show();
   });
-  $(".btn-next").click(
-
+  $(document).on("click",".btn-next",
     function() {
 			$(".btn-box").hide();
       Clear();

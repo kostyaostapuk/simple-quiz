@@ -1,9 +1,10 @@
 $(function() {
   var qstnTitle = $(".question-title");
-
+	var qstnCounter=$(".question-counter");
   var answerBox = $(".answer-box");
   var listAdvantageBox = $("#list-advantage");
   var progressBar = $(".progress-bar");
+	var progress=$(".progress");
   var discountBox = $("#discount");
   var daysBox = $("#days");
   var suffixBox = $("#days-suffix");
@@ -177,6 +178,7 @@ $(function() {
       qstnTitle.text(title);
 
 
+
       if (img === "") {
         var bodyAnswer = "<li class='list-group-item'><input class='radio-btn' name='answer' value='question" + i + "' type='radio'>"+choice+
           "</li>";
@@ -244,7 +246,23 @@ $(function() {
     progressBar.attr("aria-valuenow", 100);
     $(".progress-bar").text("100%");
   }
+	function CloseQuiz(){
+		setTimeout(function(){
+			Clear();
+			qstnTitle.empty();
+			progress.empty();
+			qstnCounter.empty();
+			$("#quiz").attr("class","animated fadeOut");
+			$("#quiz").remove();
 
+		},1500);
+	}
+	function displayTemplate(){
+		setTimeout(function(){
+			$("#end").css("display","block");
+			$("#end").attr("class", "animated fadeIn");
+		},3000);
+	}
   //Handler event click on ipnut
   $(document).on("click", ".radio-btn", function() {
 		$(".btn-box").show();
@@ -261,9 +279,9 @@ $(function() {
 
       } else {
         progressBarFull();
+				CloseQuiz();
+				displayTemplate();
       }
-
-
     }
   );
 });

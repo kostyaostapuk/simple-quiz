@@ -78,7 +78,7 @@ span#currency {
 }
 
 .btn-box {
-  margin-top: 20px;
+  margin-top: 12px;
 }
 /*----- QUIZ Close -----*/
 
@@ -146,8 +146,8 @@ section#end {
   padding: 10px;
 }
 
-.list-group i {
-  font-size: 45px;
+.list i {
+  font-size: 35px;
   margin-right: 10px;
 }
 

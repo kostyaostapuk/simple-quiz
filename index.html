@@ -9,6 +9,7 @@
 	<!-- <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css"> -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
 	<link rel="stylesheet" href="css/style.css">
 
 	<title>Simple Quiz</title>
@@ -50,9 +51,11 @@
 								<div class="question-counter">Вопрос <span id="question-start"></span> из <span id="question-end"></span></div>
 								<div class="question-title"></div>
 							</div>
-							<div class="answer-box"></div>
+							<div class="answer-box">
+
+							</div>
 							<div class="col-md-12 text-center">
-								<div class="btn-box">
+								<div class="btn-box animated fadeIn">
 									<button id="next" class="btn-next">Следующий вопрос</button>
 								</div>
 							</div>
@@ -89,7 +92,7 @@
 							действует в течение <span id="days"></span> <span id="days-suffix"></span>
 							<div class="discription"></div>
 							</div>
-							<ul class="list-group">
+							<ul id="list-advantage" class="list-group">
 
 							</ul>
 						</div>

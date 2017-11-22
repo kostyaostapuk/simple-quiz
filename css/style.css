@@ -55,8 +55,13 @@ span#currency {
 .progress .progress-bar {
   background-image: linear-gradient(90deg, #00d9bf, #00d977);
   transition: 2s;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-size: 14px;
 }
-
+.progress{
+	height: 35px;
+}
 .question-title {
   margin: 10px 0px;
   font-weight: 700;
@@ -75,7 +80,6 @@ span#currency {
 .btn-box {
   margin-top: 20px;
 }
-
 /*----- QUIZ Close -----*/
 
 /*----- IMAGES -----*/
@@ -92,6 +96,7 @@ span#currency {
 .btn-next {
   margin-top: 5px;
   background-image: linear-gradient(90deg, #00d9bf, #00d977);
+	background-color: transparent !important;
   border-color: transparent;
   color: #fff;
   padding: 5px 20px 5px 20px;
@@ -112,8 +117,8 @@ span#currency {
   display: none;
 }
 .radio-btn{
-	width: 15px;
-	height: 15px;
+	width: 17px;
+	height: 17px;
 }
 /*----- BUTTONS Close -----*/
 
@@ -121,7 +126,7 @@ span#currency {
 
 section#end {
   margin-bottom: 20px;
-  /*display: none;*/
+  display: none;
 }
 
 .list-group-item {

@@ -261,7 +261,7 @@ $(function() {
 		setTimeout(function(){
 			$("#end").css("display","block");
 			$("#end").attr("class", "animated fadeIn");
-		},3000);
+		},2000);
 	}
   //Handler event click on ipnut
   $(document).on("click", ".radio-btn", function() {

@@ -297,14 +297,6 @@ $(function() {
 		}else {
 			$(".btn-box").hide();
 		}
-		// var checked=false;
-		// if(checked==false){
-		// 	$(".btn-box").show();
-		// 	checked=true;
-		// }else{
-		// 	$(".btn-box").hide();
-		// }
-
   });
 	$(document).on("click", "#user-specialty", function() {
 		$("#user-specialty").keyup(function(){

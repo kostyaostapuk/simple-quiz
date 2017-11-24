@@ -80,6 +80,12 @@ span#currency {
 .btn-box {
   margin-top: 12px;
 }
+.answer-block{
+	margin-left: 20px;
+	margin-top: 10px;
+	display: flex;
+	vertical-align: middle;
+}
 /*----- QUIZ Close -----*/
 
 /*----- IMAGES -----*/
@@ -119,6 +125,12 @@ span#currency {
 .radio-btn{
 	width: 17px;
 	height: 17px;
+}
+.checkbox-btn{
+	width: 17px;
+	height: 17px;
+	margin-right: 3px;
+	margin-top: 4px;
 }
 /*----- BUTTONS Close -----*/
 

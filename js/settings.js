@@ -5,7 +5,8 @@ $(function() {
   var listAdvantageBox = $("#list-advantage");
   var progressBar = $(".progress-bar");
 	var progress=$(".progress");
-  var discountBox = $("#discount");
+  var discountBox = $(".discount-info");
+	var callbackBox=$(".callback");
   var daysBox = $("#days");
   var suffixBox = $("#days-suffix");
   var discriptBox = $(".discription");
@@ -13,6 +14,7 @@ $(function() {
   var qstnStartBox = $("#question-start");
   var qstnEndBox = $("#question-end");
   var btnBox = $(".btn-box");
+	var quizBox=$("#quiz-box");
 
   //===============================
   //========Настройки QUIZ=========
@@ -21,11 +23,14 @@ $(function() {
   var title = "Благодарим за ваши ответы!";
   var days = 31;
   var discript = "на любую вашу сделку";
+	var discountHide= true;
+	var hideCallBack=true;
   //Количество всех вопросов
   //
   //===============================
 
   ChangeValuesTemplate();
+	HideBlocks();
 
   function changeSuffix(value) {
     if (value == 1) {
@@ -39,7 +44,16 @@ $(function() {
       return "дней";
     }
   }
-
+	function HideBlocks(){
+		if (discountHide===true) {
+			discountBox.empty();
+		}
+		if (hideCallBack===true) {
+			callbackBox.empty();
+		}
+		quizBox.attr("class", "");
+		quizBox.attr("class", "col-md-12");
+	}
   function ChangeValuesTemplate() {
     templateTitleBox.text(title);
     discriptBox.text(discript);
@@ -70,10 +84,10 @@ $(function() {
     {
       title: "1. Заголовок вопроса",
       answers: [
-        "Ответ №1 вопроса 1",
-        "Ответ №2 вопроса 1",
-        "Ответ №3 вопроса 1",
-        "Ответ №4 вопроса 1"
+        "Прямая",
+        "Угловая",
+        "С островом",
+        "П-образная"
       ],
       img: [
         "img/typeProduct/question-1/1.jpg",
@@ -81,7 +95,8 @@ $(function() {
         "img/typeProduct/question-1/3.jpg",
         "img/typeProduct/question-1/4.jpg"
       ],
-      type: "grid"
+      type: "grid",
+			template: ""
     },
     //Вопрос 2
     {
@@ -98,7 +113,8 @@ $(function() {
         "",
         ""
       ],
-      type: "grid"
+      type: "grid",
+			template: ""
     },
     //Вопрос 3
     {
@@ -110,12 +126,15 @@ $(function() {
         "Ответ №4 вопроса 3"
       ],
       img: [
-        "img/typeProduct/question-3/1.jpg",
-        "img/typeProduct/question-3/2.jpg",
-        "img/typeProduct/question-3/3.jpg",
-        "img/typeProduct/question-3/4.jpg"
+        "",
+        "",
+        "",
+        ""
       ],
-      type: "list"
+      type: "list",
+			template: "<div class='col-md-12 text-center'>"+
+			"<div class='col-md-4'><input id='user-specialty' type='text' class='form-control text-center' name='phone-user' placeholder='Placeholder content' required></div><div class='answer-block'><input class='checkbox-btn' type='checkbox'>I don't know</div>"+
+			"</div>"
     },
     //Вопрос 4
     {
@@ -132,7 +151,8 @@ $(function() {
         "img/typeProduct/question-4/3.jpg",
         "img/typeProduct/question-4/4.jpg"
       ],
-      type: "list"
+      type: "list",
+			template: ""
     }
   ];
 
@@ -175,6 +195,7 @@ $(function() {
       }
       choice = question[currentQuestion].answers[i];
       img = question[currentQuestion].img[i];
+			template = question[currentQuestion].template;
       qstnTitle.text(title);
 
 
@@ -185,15 +206,16 @@ $(function() {
         $(".list-group").append(bodyAnswer);
       } else {
         var bodyAnswerFull = "<div class='col-md-" + sizeCol + " text-center animated fadeIn'>" +
-          choice +
           "<br><img class='img-responsive rounded' src=" + img + "><br>" +
           "<input class='radio-btn' name='answer' value='question" + i + "' type='radio'>" +
-          "</div>";
+	          choice +"</div>";
         answerBox.append(bodyAnswerFull);
       }
-
-
     }
+		if(template!=""){
+			$(".list-group").empty();
+			answerBox.append(template);
+		}
   }
   Generated();
 
@@ -266,6 +288,34 @@ $(function() {
   //Handler event click on ipnut
   $(document).on("click", ".radio-btn", function() {
 		$(".btn-box").show();
+  });
+
+
+	$(document).on("click", ".checkbox-btn", function() {
+		if ($(".checkbox-btn").prop("checked")==true) {
+			$(".btn-box").show();
+		}else {
+			$(".btn-box").hide();
+		}
+		// var checked=false;
+		// if(checked==false){
+		// 	$(".btn-box").show();
+		// 	checked=true;
+		// }else{
+		// 	$(".btn-box").hide();
+		// }
+
+  });
+	$(document).on("click", "#user-specialty", function() {
+		$("#user-specialty").keyup(function(){
+			var body=$("#user-specialty").val();
+			if (body.length>5) {
+				$(".btn-box").show();
+			}
+			else{
+				$(".btn-box").hide();
+			}
+		});
   });
   $(document).on("click", ".btn-next",
     function() {

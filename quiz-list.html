@@ -12,8 +12,8 @@
 
 	<body>
 		<button id="add">Добавить вопрос</button>
-  		<button id="start">Начать тест</button>
-  		<div id="container"></div>
+		<button id="start">Начать тест</button>
+		<div id="container"></div>
 
 		<script>
 			/*
@@ -25,7 +25,6 @@
 			const CONTAINER = document.getElementById('container');
 
 			const QUESTIONS = [];
-			let questionIndex = 1;
 			function addQuestion() {
 				const questionBody = prompt('Введите вопрос');
 
@@ -43,31 +42,36 @@
 				addKey(question);
 
 				if (!question.keys) return;
-
 				QUESTIONS.push(question);
-				questionIndex++;
-				console.log(QUESTIONS);
 			}
 			function addAnswers(answersStore) {
 				for (let i = 1; i <= 4; i++) {
 					const answer = prompt(`Введите текст ${i} варианта ответа`);
 					if (!answer) {
-						alert(`Вы не ввели текст ${i} варианта ответа. Попробуйте добавить вопрос заново`);
+						alert(
+							`Вы не ввели текст ${i} варианта ответа. Попробуйте добавить вопрос заново`
+						);
 						return;
 					}
 					answersStore.push(answer);
 				}
 			}
 			function addKey(question) {
-				const inputKey = prompt(`Введите номера правильных ответов через запятую. Нумерация начинается с 1`);
+				const inputKey = prompt(
+					`Введите номера правильных ответов через запятую. Нумерация начинается с 1`
+				);
 
 				if (!inputKey) {
-					alert('Вы не ввели номера правильных ответов. Попробуйте добавить вопрос заново');
+					alert(
+						'Вы не ввели номера правильных ответов. Попробуйте добавить вопрос заново'
+					);
 					return;
 				}
 
 				const arrKeys = inputKey.split(',');
-				const correctInput = arrKeys.every((key) => key === '1' || key === '2' || key === '3' || key === '4');
+				const correctInput = arrKeys.every(
+					(key) => key === '1' || key === '2' || key === '3' || key === '4'
+				);
 				if (!correctInput) {
 					alert(
 						'Поле может содержать только уникальные цифры 1,2,3,4, разделенные запятой. Попробуйте добавить вопрос заново.'
@@ -111,6 +115,7 @@
 					selected.forEach((item) => selectedValues.push(item.value));
 					if (keys.length !== selectedValues.length) {
 						question.status = false;
+						console.log(QUESTIONS);
 						calcResults();
 						return;
 					}
@@ -120,9 +125,7 @@
 						debugger;
 						result.push(selectedValues.includes(keys[i]));
 					}
-					console.log(result);
 					question.status = result.every((item) => item === true);
-					console.log(question.status);
 				}
 				console.log(QUESTIONS);
 				calcResults();

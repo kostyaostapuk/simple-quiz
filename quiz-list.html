@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+		<link rel="stylesheet" href="css/style.css" />
+
+		<title>Quiz-list</title>
+	</head>
+
+	<body>
+		<button id="add">Добавить вопрос</button>
+  		<button id="start">Начать тест</button>
+  		<div id="container"></div>
+
+		<script>
+			/*
+				Author: Kostya Ostapuk
+				Github: https://github.com/kostyaostapuk
+			*/
+			const ADD_BUTTON = document.getElementById('add');
+			const START_BUTTON = document.getElementById('start');
+			const CONTAINER = document.getElementById('container');
+
+			const QUESTIONS = [];
+			let questionIndex = 1;
+			function addQuestion() {
+				const questionBody = prompt('Введите вопрос');
+
+				if (!questionBody) {
+					alert('Вы не ввели текст вопроса');
+					return;
+				}
+
+				const question = {
+					body: questionBody,
+					answers: [],
+					keys: null,
+				};
+				addAnswers(question.answers);
+				addKey(question);
+
+				if (!question.keys) return;
+
+				QUESTIONS.push(question);
+				questionIndex++;
+				console.log(QUESTIONS);
+			}
+			function addAnswers(answersStore) {
+				for (let i = 1; i <= 4; i++) {
+					const answer = prompt(`Введите текст ${i} варианта ответа`);
+					if (!answer) {
+						alert(`Вы не ввели текст ${i} варианта ответа. Попробуйте добавить вопрос заново`);
+						return;
+					}
+					answersStore.push(answer);
+				}
+			}
+			function addKey(question) {
+				const inputKey = prompt(`Введите номера правильных ответов через запятую. Нумерация начинается с 1`);
+
+				if (!inputKey) {
+					alert('Вы не ввели номера правильных ответов. Попробуйте добавить вопрос заново');
+					return;
+				}
+
+				const arrKeys = inputKey.split(',');
+				const correctInput = arrKeys.every((key) => key === '1' || key === '2' || key === '3' || key === '4');
+				if (!correctInput) {
+					alert(
+						'Поле может содержать только уникальные цифры 1,2,3,4, разделенные запятой. Попробуйте добавить вопрос заново.'
+					);
+					return;
+				}
+				question.keys = arrKeys;
+			}
+			function calcResults() {
+				let counter = 0;
+				let mistakes = '';
+				QUESTIONS.forEach((question) => {
+					if (!question.status) {
+						mistakes += question.body + '\n';
+						return;
+					}
+					counter++;
+				});
+				const result = `Ваш результат ${counter} из ${QUESTIONS.length}`;
+				const message =
+					counter === QUESTIONS.length
+						? `${result} . Вы молодец!`
+						: `Вы неправильно ответили на вопросы: \n ${mistakes} \n ${result}`;
+				alert(message);
+			}
+			function checkQuiz() {
+				for (let i = 0; i < QUESTIONS.length; i++) {
+					const question = QUESTIONS[i];
+					const selected = document.querySelectorAll(`#question${i} :checked`);
+
+					if (!selected.length) {
+						alert(
+							'Все вопросы должны иметь хотя бы один выбранный вариант ответа. Проверьте правильность заполнения'
+						);
+						return;
+					}
+
+					const keys = question.keys;
+					const selectedValues = [];
+					debugger;
+					selected.forEach((item) => selectedValues.push(item.value));
+					if (keys.length !== selectedValues.length) {
+						question.status = false;
+						calcResults();
+						return;
+					}
+
+					const result = [];
+					for (let i = 0; i < keys.length; i++) {
+						debugger;
+						result.push(selectedValues.includes(keys[i]));
+					}
+					console.log(result);
+					question.status = result.every((item) => item === true);
+					console.log(question.status);
+				}
+				console.log(QUESTIONS);
+				calcResults();
+			}
+			function renderQuiz() {
+				CONTAINER.innerHTML = '';
+
+				if (!QUESTIONS.length) {
+					alert('Вы не добавили вопросы');
+					return;
+				}
+				for (let i = 0; i < QUESTIONS.length; i++) {
+					const div = document.createElement('div');
+					div.id = 'question' + i;
+
+					const { body, answers } = QUESTIONS[i];
+
+					const questionTitle = document.createElement('h4');
+					questionTitle.textContent = `${i + 1}. ${body}`;
+					div.appendChild(questionTitle);
+
+					const list = document.createElement('ul');
+					list.style.paddingLeft = '10px';
+					answers.forEach((item, index) => {
+						const li = document.createElement('li');
+						li.style.display = 'flex';
+						const input = document.createElement('input');
+						input.type = 'checkbox';
+						input.value = index + 1;
+						const span = document.createElement('span');
+						span.textContent = item;
+						li.appendChild(input);
+						li.appendChild(span);
+						list.appendChild(li);
+					});
+
+					div.appendChild(list);
+					CONTAINER.appendChild(div);
+
+					START_BUTTON.disabled = true;
+					ADD_BUTTON.disabled = true;
+				}
+
+				const SEND_BUTTON = document.createElement('button');
+				SEND_BUTTON.textContent = 'Отправить';
+				CONTAINER.appendChild(SEND_BUTTON);
+				SEND_BUTTON.addEventListener('click', checkQuiz);
+			}
+			ADD_BUTTON.addEventListener('click', addQuestion);
+			START_BUTTON.addEventListener('click', renderQuiz);
+		</script>
+	</body>
+</html>
